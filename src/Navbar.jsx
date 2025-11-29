@@ -15,10 +15,13 @@ export const Navbar = ({ onOpenModal }) => {
   return (
     <nav className="flex items-center justify-between px-4 md:px-8 py-6 z-50 relative">
       
-      {/* Логотип */}
-      <div onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-        <AuraLogo /> 
-      </div>
+      {/* ЛОГОТИП (Просто текст) */}
+<div 
+  className="cursor-pointer hover:text-white transition-colors text-sm tracking-[0.2em] font-semibold text-cyan-300" 
+  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+>
+  AURA APPS
+</div>
 
       {/* Меню для Компьютера (скрыто на мобильном) */}
       <div className="hidden md:flex gap-12 text-xs uppercase tracking-widest text-cyan-100/80 font-medium">
