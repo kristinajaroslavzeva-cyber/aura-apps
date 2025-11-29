@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  /* Глубокий темно-синий цвет, как на картинке */
+  background-color: #0b1121; 
+  color: white;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden; /* Чтобы анимация не расширяла экран */
+}
+/* Прячем стандартный курсор на всем сайте */
+* {
+  cursor: none !important;
+}
+
+/* Возвращаем курсор, если экран маленький (на телефонах курсора нет) */
+@media (max-width: 768px) {
+  * {
+    cursor: auto !important;
+  }
+}
