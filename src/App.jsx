@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // <--- ИСПРАВЛЕНИЕ 1: Добавили useState
+import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { GlassCard } from './GlassCard';
 import { Navbar } from './Navbar';
@@ -13,63 +13,57 @@ import { Typewriter } from './Typewriter';
 import { ProjectModal } from './ProjectModal';
 
 function App() {
-  // Состояние: открыта модалка или нет
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // Функция открытия/закрытия
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <div className="relative min-h-screen w-full bg-[#0b1121] overflow-x-hidden">
+    <div className="relative min-h-screen w-full bg-[#0b1121] overflow-x-hidden font-sans">
       
-      {/* 1. САМА МОДАЛКА */}
       <ProjectModal isOpen={isModalOpen} onClose={closeModal} />
-      
       <Preloader />
-      <CustomCursor />
+      
+      {/* Прячем кастомный курсор на мобильных (он там не нужен и мешает) */}
+      <div className="hidden md:block"><CustomCursor /></div>
 
-      {/* 2. ГЛАВНЫЙ ФОН (ТОЧКИ) */}
       <div className="fixed inset-0 z-0 pointer-events-none">
          <ParticlesBackground />
       </div>
 
-      <div className="relative z-10 w-full min-h-screen flex items-center justify-center p-4 md:p-10 mb-10">
+      <div className="relative z-10 w-full min-h-screen flex items-center justify-center p-2 md:p-10 mb-10">
         
-        {/* ID capabilities нужен для скролла */}
-        <GlassCard id="capabilities" className="w-full max-w-7xl h-[85vh] flex flex-col relative overflow-hidden">
+        {/* Адаптивная высота: min-h-[85vh] */}
+        <GlassCard id="capabilities" className="w-full max-w-7xl min-h-[85vh] md:h-[85vh] flex flex-col relative overflow-hidden pb-10 md:pb-0">
           
-          {/* 3. ОБЛАКА ВНУТРИ */}
           <div className="absolute inset-0 z-0 opacity-60 pointer-events-none">
             <Canvas camera={{ position: [0, 0, 5] }}>
                <DigitalAura />
             </Canvas>
           </div>
 
-          {/* 4. КОНТЕНТ */}
           <div className="relative z-10 w-full h-full flex flex-col">
             
-            {/* ИСПРАВЛЕНИЕ 2: Передаем функцию открытия в Navbar */}
             <Navbar onOpenModal={openModal} />
             
-            <div className="flex-1 flex items-center px-4 md:px-20">
-              <div className="w-full md:w-1/2 z-20 pointer-events-none">
-                <div className="pointer-events-auto max-w-xl text-left">
-                  <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight drop-shadow-lg leading-tight">
+            {/* АДАПТИВНАЯ СЕТКА: На мобильном в колонку, на компе в ряд */}
+            <div className="flex-1 flex flex-col md:flex-row items-center px-4 md:px-20 pt-4 md:pt-0 gap-8 md:gap-0">
+              
+              {/* ТЕКСТ (На мобильном он будет вторым, order-2) */}
+              <div className="w-full md:w-1/2 z-20 pointer-events-none order-2 md:order-1 text-center md:text-left">
+                <div className="pointer-events-auto max-w-xl mx-auto md:mx-0">
+                  <h1 className="text-4xl md:text-7xl font-bold text-white mb-4 tracking-tight drop-shadow-lg leading-tight">
                     AURA APPS
                   </h1>
                   
-                  {/* ЭФФЕКТ ПЕЧАТИ */}
-                  <p className="text-xl md:text-2xl text-cyan-300 mb-6 font-light tracking-wide h-[60px] md:h-auto">
+                  <div className="text-lg md:text-2xl text-cyan-300 mb-6 font-light tracking-wide h-[50px] md:h-[60px] flex items-center justify-center md:justify-start">
                      <Typewriter text="Создание ярких цифровых впечатлений" delay={50} />
-                  </p>
+                  </div>
                   
-                  <p className="text-sm md:text-base text-blue-100/80 mb-10 leading-relaxed max-w-md drop-shadow-md">
+                  <p className="text-sm md:text-base text-blue-100/80 mb-8 leading-relaxed drop-shadow-md">
                     Мы создаем мобильные приложения полного цикла. 
                     От сложной архитектуры и интеграции <span className="text-cyan-400 font-bold">ИИ</span> до публикации в сторы.
                   </p>
                   
-                  {/* КНОПКА START PROJECT */}
                   <button 
                     onClick={openModal}
                     className="px-8 py-3 rounded-full border border-cyan-400/30 text-cyan-300 hover:bg-cyan-400/10 transition-all cursor-pointer uppercase text-xs tracking-widest font-semibold backdrop-blur-sm bg-black/20 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]"
@@ -79,23 +73,20 @@ function App() {
 
                 </div>
               </div>
-              <div className="hidden md:block absolute right-0 top-0 bottom-0 w-1/2 md:w-[60%] h-full">
+
+              {/* 3D СЦЕНА (На мобильном первая, order-1) */}
+              {/* Задали фиксированную высоту 350px для телефона */}
+              <div className="w-full h-[350px] md:h-full md:w-1/2 md:absolute md:right-0 md:top-0 md:bottom-0 order-1 md:order-2 z-10">
                  <Scene3D />
               </div>
+
             </div>
           </div>
         </GlassCard>
       </div>
 
-      {/* Блок Services с ID для скролла */}
-      <div id="services">
-        <Services />
-      </div>
-      
-      {/* Блок Contact с ID для скролла */}
-      <div id="contact">
-        <ContactFooter />
-      </div>
+      <div id="services"><Services /></div>
+      <div id="contact"><ContactFooter /></div>
 
     </div>
   );
