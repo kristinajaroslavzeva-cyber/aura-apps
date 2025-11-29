@@ -95,7 +95,7 @@ function ResponsiveGroup() {
       {/* Центр */}
       <Phone position={[0, 0, 1]} rotation={[0, -0.2, 0]} scale={1.1} frontImg="/1.jpg" backImg="/1b.jpg" link="//www.rustore.ru/catalog/app/com.natalchart.natalchartapp" />
       {/* Левый */}
-      <Phone position={[-2, -0.5, 0]} rotation={[0.1, 0.3, -0.1]} frontImg="/2.jpg" backImg="/2b.jpg" link="www.rustore.ru/catalog/app/com.name.petmemo" />
+      <Phone position={[-2, -0.5, 0]} rotation={[0.1, 0.3, -0.1]} frontImg="/2.jpg" backImg="/2b.jpg" link="//www.rustore.ru/catalog/app/com.name.petmemo" />
       {/* Правый */}
       <Phone position={[2, -0.3, 0.5]} rotation={[-0.1, -0.4, 0.1]} frontImg="/3.jpg" backImg="/3b.jpg" link="//www.rustore.ru/catalog/app/com.natalchart.natalchartapp" />
     </group>
