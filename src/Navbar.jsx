@@ -50,9 +50,8 @@ export const Navbar = ({ onOpenModal }) => {
       {/* ВЫПАДАЮЩЕЕ МЕНЮ (Только на мобильном) */}
       {mobileMenuOpen && (
         <div className="absolute top-full left-0 right-0 bg-[#0f172a]/95 backdrop-blur-xl border-b border-white/10 p-6 flex flex-col gap-6 text-center md:hidden animate-in slide-in-from-top-5 rounded-b-2xl shadow-2xl">
-          <button onClick={() => scrollTo('services')} className="text-white text-sm uppercase tracking-widest py-2 border-b border-white/5">Services</button>
-          <button onClick={() => scrollTo('capabilities')} className="text-white text-sm uppercase tracking-widest py-2 border-b border-white/5">Capabilities</button>
-          <button onClick={() => scrollTo('contact')} className="text-white text-sm uppercase tracking-widest py-2">Contact</button>
+          <button onClick={() => scrollTo('services')} className="text-white text-sm uppercase tracking-widest py-2 border-b border-white/5">Что мы предлагаем</button>
+          <button onClick={() => scrollTo('contact')} className="text-white text-sm uppercase tracking-widest py-2">Контакты</button>
         </div>
       )}
 
