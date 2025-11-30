@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
 
-// Компонент светящейся кнопки (тот же принцип, что у карточек)
 const GlowingButton = ({ href, color, label, icon }) => {
   const btnRef = useRef(null);
 
   const handleMouseMove = (e) => {
+    // ВАЖНОЕ ИСПРАВЛЕНИЕ: используем btnRef
     if (!btnRef.current) return;
     const rect = btnRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -15,22 +15,17 @@ const GlowingButton = ({ href, color, label, icon }) => {
 
   return (
     <a
-      ref={btnRef}
+      ref={btnRef} // ВАЖНО: привязали btnRef
       href={href}
       target="_blank"
       rel="noreferrer"
       onMouseMove={handleMouseMove}
       className="group relative w-full md:w-auto overflow-hidden rounded-xl bg-white/5 px-8 py-4 transition-all duration-300 hover:scale-105 hover:bg-white/10"
     >
-      {/* Свечение фона */}
       <div 
         className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100"
-        style={{
-          background: `radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), ${color}20, transparent 60%)`
-        }}
+        style={{ background: `radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), ${color}20, transparent 60%)` }}
       />
-      
-      {/* Свечение рамки */}
       <div 
         className="pointer-events-none absolute inset-0 rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
         style={{
@@ -43,7 +38,6 @@ const GlowingButton = ({ href, color, label, icon }) => {
         }}
       />
       
-      {/* Текст кнопки */}
       <div className="relative flex items-center justify-center gap-3 font-bold text-white group-hover:text-cyan-200 transition-colors">
         <span>{label}</span>
       </div>
@@ -64,26 +58,26 @@ export const ContactFooter = () => {
           
           <GlowingButton 
             href="https://wa.me/77053512722" 
-            color="#25D366" // Зеленый для WhatsApp
+            color="#25D366" 
             label="WhatsApp" 
           />
 
           <GlowingButton 
             href="https://t.me/+77053512722" 
-            color="#0088cc" // Синий для Telegram
+            color="#0088cc" 
             label="Telegram" 
           />
 
           <GlowingButton 
             href="tel:+77053512722" 
-            color="#ffffff" // Белый для телефона
+            color="#ffffff" 
             label="+7 (705) 351-27-22" 
           />
 
         </div>
 
         <p className="mt-10 text-white/30 text-sm">
-          © 2025 AURA APPS. All rights reserved.
+          © 2025 AURA APPS. Все права защищены.
         </p>
       </div>
     </footer>
